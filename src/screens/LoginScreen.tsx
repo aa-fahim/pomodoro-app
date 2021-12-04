@@ -1,9 +1,12 @@
 import React, { useState } from "react";
-import { View, TextInput, Text, StyleSheet, Button } from "react-native";
+import { View, TextInput, Text, StyleSheet, TouchableOpacity } from "react-native";
+import InputBox from "../components/InputBox";
+import Button from "../components/Button";
 import { registerUser } from "../api/api";
+import { themes } from "../styles/themes";
 
 export default function LoginScreen() {
-  const { signupLabel } = LoginScreen.constants.en;
+  const { loginLabel } = LoginScreen.constants.en;
   const [userName, setuserName] = useState<string>("");
   const [password, setPassword] = useState<string>("");
 
@@ -14,26 +17,32 @@ export default function LoginScreen() {
 
   return (
     <View style={styles.container}>
-      <Text>Helo world</Text>
-      <TextInput
+      <Text style={styles.headerStyle}>Login</Text>
+      <InputBox 
+        label="Username"
+        placeholder="Enter username"
         value={userName}
         onChangeText={setuserName}
-        style={styles.textInput}
+        style={styles.inputBox}
       />
-      <TextInput
+      <InputBox 
+        label="Password"
+        placeholder="Enter password"
         value={password}
         onChangeText={setPassword}
         secureTextEntry={true}
-        style={styles.textInput}
+        style={styles.inputBox}
       />
-      <Button title={signupLabel} onPress={onSubmitPress} />
+      <Button label={loginLabel} onPress={onSubmitPress} />
+
+
     </View>
   );
 }
 
 LoginScreen.constants = {
   en: {
-    signupLabel: "Sign Up",
+    loginLabel: "Login",
   },
 };
 
@@ -42,11 +51,21 @@ const styles = StyleSheet.create({
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "gray",
+    backgroundColor: themes.secondary,
     height: "100%",
   },
-  textInput: {
-    color: "white",
-    border: "1px solid white",
+  headerStyle: {
+    fontSize: 20,
+    color: themes.white,
+    marginBottom: 20
   },
+  inputBox: {
+    width: 200,
+    marginBottom: 40
+  },
+  submitButton: {
+    width: 200,
+    borderRadius: 4,
+    backgroundColor: themes.primary
+  }
 });
