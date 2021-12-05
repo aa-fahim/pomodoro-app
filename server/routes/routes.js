@@ -16,4 +16,7 @@ module.exports = (app) => {
 
   // Register a user
   app.post("/users", user.register);
+
+  // Find email of user
+  app.post("/users/retrieve-username", user.findUserName);
 };
