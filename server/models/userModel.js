@@ -1,25 +1,26 @@
 const sql = require("../config/users.db.js");
+const mongoose = require("mongoose");
 
-// constructor
-const User = function (user) {
-  this.userName = user.userName;
-  this.email = user.email;
-};
+// schema
+const userSchema = new mongoose.Schema({
+  userName: String,
+  email: String,
+});
+
+const User = mongoose.model("User", userSchema);
 
 User.register = (newUser, result) => {
-  //   sql.query("INSERT INTO logentries SET ?", newLogEntry, (err, res) => {
-  //     if (err) {
-  //       console.log("error: ", err);
-  //       result(err, null);
-  //       return;
-  //     }
-
-  //     console.log("created log entry: ", newLogEntry);
-  //     result(null, newLogEntry);
-  //   });
-
-  console.log("successfully received user information");
-  result(null, newUser);
+  newUser
+    .save()
+    .then((res) => {
+      console.log("User was successfully saved.");
+      mongoose.connection.close();
+      result(null, newUser);
+    })
+    .catch((err) => {
+      console.log("Error creating new user: ", err);
+      result(err, null);
+    });
 };
 
 module.exports = User;
