@@ -1,5 +1,12 @@
 import React, { useState } from "react";
-import { View, TextInput, Text, StyleSheet, TouchableOpacity } from "react-native";
+import {
+  View,
+  TextInput,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+} from "react-native";
+import styled from "styled-components/native";
 import InputBox from "../components/InputBox";
 import Button from "../components/Button";
 import { registerUser } from "../api/api";
@@ -16,27 +23,23 @@ export default function LoginScreen() {
   };
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.headerStyle}>Login</Text>
-      <InputBox 
+    <Container>
+      <Header>Login</Header>
+      <StyledInputBox
         label="Username"
         placeholder="Enter username"
         value={userName}
-        onChangeText={setuserName}
-        style={styles.inputBox}
+        onChangeText={() => setuserName}
       />
-      <InputBox 
+      <StyledInputBox
         label="Password"
         placeholder="Enter password"
         value={password}
-        onChangeText={setPassword}
+        onChangeText={() => setPassword}
         secureTextEntry={true}
-        style={styles.inputBox}
       />
-      <Button label={loginLabel} onPress={onSubmitPress} />
-
-
-    </View>
+      <Button label={loginLabel} onPress={() => onSubmitPress} />
+    </Container>
   );
 }
 
@@ -46,26 +49,21 @@ LoginScreen.constants = {
   },
 };
 
-const styles = StyleSheet.create({
-  container: {
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: themes.secondary,
-    height: "100%",
-  },
-  headerStyle: {
-    fontSize: 20,
-    color: themes.white,
-    marginBottom: 20
-  },
-  inputBox: {
-    width: 200,
-    marginBottom: 40
-  },
-  submitButton: {
-    width: 200,
-    borderRadius: 4,
-    backgroundColor: themes.primary
-  }
-});
+const Container = styled.View`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: ${themes.secondary};
+  height: 100%;
+`;
+
+const Header = styled.Text`
+  color: ${themes.white};
+  font-size: 20px;
+  margin-bottom: 20;
+`;
+
+const StyledInputBox = styled(InputBox)`
+  width: 200,
+  margin-bottom: 40,
+`;
