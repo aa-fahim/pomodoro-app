@@ -1,10 +1,7 @@
-import React, { CSSProperties } from "react";
+import React from "react";
 import styled from "styled-components/native";
 import {
   View,
-  TextInput,
-  StyleSheet,
-  Text,
   StyleProp,
   ViewStyle,
 } from "react-native";
@@ -14,7 +11,7 @@ type InputBoxProps = {
   label: string;
   placeholder: string;
   value: string;
-  onChangeText: () => {};
+  onChangeText: (value: string) => void;
   style?: StyleProp<ViewStyle>;
   secureTextEntry?: boolean;
 };

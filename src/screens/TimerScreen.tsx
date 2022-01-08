@@ -1,7 +1,13 @@
 import React from "react";
+import { View } from "react-native";
+import CountdownTimer from "../components/CountdownTimer";
 
-function TimerScreen() {
-  return <div></div>;
+const TimerScreen = () => {
+  return (
+    <View>
+      <CountdownTimer duration={100} isPlaying={true}/>
+    </View>
+  )
 }
 
 export default TimerScreen;

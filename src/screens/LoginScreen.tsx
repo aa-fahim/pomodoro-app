@@ -5,14 +5,19 @@ import Button from "../components/Button";
 import { registerUser } from "../api/api";
 import { themes } from "../styles/themes";
 
-export default function LoginScreen() {
+type ILoginScreen = {
+  navigation: any 
+}
+
+export default function LoginScreen({ navigation }: ILoginScreen) {
   const { loginLabel } = LoginScreen.constants.en;
   const [userName, setuserName] = useState<string>("");
   const [password, setPassword] = useState<string>("");
 
   const onSubmitPress = () => {
-    registerUser(userName, password);
+    // registerUser(userName, password);
     console.log("userName password:", userName, password);
+    navigation.navigate("MainScreen");
   };
 
   return (
@@ -22,16 +27,16 @@ export default function LoginScreen() {
         label="Username"
         placeholder="Enter username"
         value={userName}
-        onChangeText={() => setuserName}
+        onChangeText={(value) => setuserName(value)}
       />
       <StyledInputBox
         label="Password"
         placeholder="Enter password"
         value={password}
-        onChangeText={() => setPassword}
+        onChangeText={(value) => setPassword(value)}
         secureTextEntry={true}
       />
-      <Button label={loginLabel} onPress={() => onSubmitPress} />
+      <Button label={loginLabel} onPress={onSubmitPress} />
     </Container>
   );
 }
