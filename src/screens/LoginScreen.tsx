@@ -1,11 +1,4 @@
 import React, { useState } from "react";
-import {
-  View,
-  TextInput,
-  Text,
-  StyleSheet,
-  TouchableOpacity,
-} from "react-native";
 import styled from "styled-components/native";
 import InputBox from "../components/InputBox";
 import Button from "../components/Button";
@@ -64,6 +57,6 @@ const Header = styled.Text`
 `;
 
 const StyledInputBox = styled(InputBox)`
-  width: 200,
-  margin-bottom: 40,
+  width: 200;
+  margin-bottom: 20;
 `;

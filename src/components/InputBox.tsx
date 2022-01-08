@@ -1,4 +1,5 @@
 import React, { CSSProperties } from "react";
+import styled from "styled-components/native";
 import {
   View,
   TextInput,
@@ -12,46 +13,37 @@ import { themes } from "../styles/themes";
 type InputBoxProps = {
   label: string;
   placeholder: string;
-  value: string | number;
+  value: string;
   onChangeText: () => {};
-  style: StyleProp<ViewStyle>;
-  secureTextEntry: boolean;
-  className?: CSSProperties;
+  style?: StyleProp<ViewStyle>;
+  secureTextEntry?: boolean;
 };
 
-const InputBox = (props: InputBoxProps) => {
-  const { label, className, style, ...restProps } = props;
+const InputBox:React.FC<InputBoxProps> = (props: InputBoxProps) => {
+  const { label, style, ...restProps } = props;
 
   return (
-    <View className={className}>
-      <Text style={styles.label}>{label}</Text>
+    <View style={style}>
+      <Label>{label}</Label>
       <View>
-        <TextInput style={styles.textInput} {...restProps} />
+        <StyledTextInput {...restProps} />
       </View>
     </View>
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: themes.secondary,
-    height: "100%",
-  },
-  label: {
-    color: themes.white,
-    fontSize: 10,
-    marginBottom: 2,
-  },
-  textInput: {
-    color: themes.white,
-    border: "1px solid white",
-    borderRadius: 4,
-    paddingHorizontal: 10,
-    paddingVertical: 4,
-  },
-});
+const Label = styled.Text`
+  color: ${themes.white};
+  font-size: 10;
+  margin-bottom: 2;
+`;
+
+const StyledTextInput = styled.TextInput`
+  color: ${themes.white};
+  border: 1px solid white;
+  border-radius: 4;
+  padding-horizontal: 10;
+  padding-vertical: 4;
+`
 
 export default InputBox;

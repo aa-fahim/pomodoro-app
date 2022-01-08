@@ -7,17 +7,16 @@ type ButtonProps = {
   onPress: () => {};
   containerStyle?: StyleProp<ViewStyle>;
   labelStyle?: StyleProp<ViewStyle>;
-  className?: CSSProperties;
+  style?: StyleProp<ViewStyle>;
 };
 
 const Button = (props: ButtonProps) => {
-  const { label, onPress, containerStyle, labelStyle, className } = props;
+  const { label, onPress, containerStyle, labelStyle, style } = props;
 
   return (
     <TouchableOpacity
-      className={className}
+      style={style}
       onPress={onPress}
-      style={containerStyle}
     >
       <Text style={labelStyle}>{label}</Text>
     </TouchableOpacity>
