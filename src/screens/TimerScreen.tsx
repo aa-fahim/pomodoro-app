@@ -17,15 +17,26 @@ const TimerScreen = () => {
 
   return (
     <Container>
-      <Switch />
-      <CountdownTimer duration={100} isPlaying={isPlaying} />
+      <SwitchWrapper>
+        <Switch option1="Focus" option2="Break" />
+      </SwitchWrapper>
+      <CountdownTimer duration={20} isPlaying={isPlaying} />
       <ButtonWrapper>
-        <Button label={"Start"} onPress={onStartHandler} />
-        <Button label={"Stop"} onPress={onStopHandler} />
+        <TimerButton label={"Start"} onPress={onStartHandler} />
+        <TimerButton label={"Stop"} onPress={onStopHandler} />
       </ButtonWrapper>
     </Container>
   );
 };
+
+const SwitchWrapper = styled.View`
+  margin-bottom: 60px;
+`;
+
+const TimerButton = styled(Button)`
+  width: 120px;
+  height: 50px;
+`;
 
 const Container = styled.View`
   display: flex;
@@ -38,7 +49,7 @@ const ButtonWrapper = styled.View`
   display: flex;
   flex-direction: row;
   justify-content: space-around;
-  width: 100%;
-  margin-top: 20px;
+  width: 80%;
+  margin-top: 40px;
 `;
 export default TimerScreen;

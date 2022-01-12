@@ -1,19 +1,33 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components/native";
-import { TouchableOpacity } from "react-native";
+import Typography from "../components/Typography";
+import { themes } from "../styles/themes";
 
 type SwitchProps = {
+  defaultActive?: boolean;
   option1: string;
   option2: string;
 };
 
-const Switch = ({ option1 = "Yes", option2 = "No" }: SwitchProps) => {
-  const onChangeOptionHandler = () => {};
+const Switch = ({
+  defaultActive = false,
+  option1 = "Yes",
+  option2 = "No",
+}: SwitchProps) => {
+  const [isActive, setIsActive] = useState<boolean>(defaultActive);
+
+  const onChangeOptionHandler = () => {
+    setIsActive(!isActive);
+  };
 
   return (
     <Container onPress={onChangeOptionHandler}>
-      <Option>{option1}</Option>
-      <Option>{option2}</Option>
+      <Option isActive={isActive}>
+        <Typography size={16}>{option1}</Typography>
+      </Option>
+      <Option isActive={!isActive}>
+        <Typography size={16}>{option2}</Typography>
+      </Option>
     </Container>
   );
 };
@@ -21,10 +35,23 @@ const Switch = ({ option1 = "Yes", option2 = "No" }: SwitchProps) => {
 const Container = styled.TouchableOpacity`
   display: flex;
   flex-direction: row;
+  border-radius: 8px;
+  overflow: hidden;
 `;
 
-const Option = styled.TouchableOpacity`
-  background-color: blue;
+type OptionProps = {
+  isActive: boolean;
+};
+
+const Option = styled.View<OptionProps>`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: ${(props) =>
+    props.isActive ? themes.secondary : themes.fourth};
+  transition: background-color 0.4s ease;
+  height: 80px;
+  width: 120px;
 `;
 
 export default Switch;

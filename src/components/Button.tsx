@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components/native";
 import { StyleProp, ViewStyle } from "react-native";
+import Typography from "../components/Typography";
 import { themes } from "../styles/themes";
 
 type ButtonProps = {
@@ -15,11 +16,8 @@ const Button = (props: ButtonProps) => {
   const { label, onPress, labelStyle, style } = props;
 
   return (
-    <Container
-      style={style}
-      onPress={onPress}
-    >
-      <Label style={labelStyle}>{label}</Label>
+    <Container style={style} onPress={onPress}>
+      <Typography style={labelStyle}>{label}</Typography>
     </Container>
   );
 };
@@ -32,11 +30,6 @@ const Container = styled.TouchableOpacity`
   width: 200;
   height: 36;
   border-radius: 4;
-`;
-
-const Label = styled.Text`
-  color: ${themes.white};
-  font-size: 12;
 `;
 
 export default Button;
