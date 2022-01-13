@@ -1,0 +1,12 @@
+Ideas:
+    - right now, we have a start and stop button
+        - should we replace this with one button, that starts or stops depending if 
+        timer is on or off
+
+To do:
+    - add context api to control study and break periods from timer screen and profile screen
+    - add stats to profile screen
+    - control study and break peridos from profile screen
+    - add info screen about pomodoro timers
+    - can we change color of button briefly when pressed
+

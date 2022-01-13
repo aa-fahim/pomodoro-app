@@ -5,9 +5,10 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
 import LoginScreen from "./src/screens/LoginScreen";
 import TimerScreen from "./src/screens/TimerScreen";
+import ProfileScreen from "./src/screens/ProfileScreen";
+import InfoScreen from "./src/screens/InfoScreen";
 
-import { MaterialIcons } from '@expo/vector-icons';
-import { AntDesign } from '@expo/vector-icons';  
+import { MaterialIcons, Ionicons } from "@expo/vector-icons";
 
 import { themes } from "./src/styles/themes";
 
@@ -33,8 +34,13 @@ const MainStackNavigator = () => {
       <Stack.Screen name="LoginScreen" component={LoginScreen} />
       <Stack.Screen name="MainScreen" component={BottomTabNavigator} />
     </Stack.Navigator>
-  )
-}
+  );
+};
+
+type TabBarIconProps = {
+  color: string;
+  size: number;
+};
 
 const BottomTabNavigator = () => {
   return (
@@ -44,10 +50,42 @@ const BottomTabNavigator = () => {
         tabBarActiveTintColor: themes.primary,
         headerShown: false,
       }}
+      tabBarOptions={{ showLabel: false }}
     >
-      <Tab.Screen name="Timer" component={TimerScreen} options={{ tabBarLabel: 'Timer', tabBarIcon: ({ color, size }) => <MaterialIcons name="timer" size={size} color={color} /> }}/>
-      <Tab.Screen name="Timer1" component={TimerScreen} options={{ tabBarLabel: 'Profile', tabBarIcon: ({ color, size }) => <AntDesign name="profile" size={size} color={color} /> }}/>
-      <Tab.Screen name="Timer2" component={TimerScreen} />
+      <Tab.Screen
+        name="TimerScreen"
+        component={TimerScreen}
+        options={{
+          tabBarLabel: "Timer",
+          tabBarIcon: ({ color, size }: TabBarIconProps) => (
+            <MaterialIcons name="timer" size={size} color={color} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="ProfileScreen"
+        component={ProfileScreen}
+        options={{
+          tabBarLabel: "Profile",
+          tabBarIcon: ({ color, size }: TabBarIconProps) => (
+            <Ionicons
+              name="md-person-circle-outline"
+              size={size}
+              color={color}
+            />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="InfoScreen"
+        component={InfoScreen}
+        options={{
+          tabBarLabel: "Info",
+          tabBarIcon: ({ color, size }: TabBarIconProps) => (
+            <MaterialIcons name="info-outline" size={size} color={color} />
+          ),
+        }}
+      />
     </Tab.Navigator>
-  )
-}
+  );
+};

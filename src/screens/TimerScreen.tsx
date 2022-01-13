@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components/native";
+import Container from "../styles/Container";
+import Wrapper from "../styles/Wrapper";
 import Button from "../components/Button";
 import Switch from "../components/Switch";
 import CountdownTimer from "../components/CountdownTimer";
@@ -17,14 +19,16 @@ const TimerScreen = () => {
 
   return (
     <Container>
-      <SwitchWrapper>
-        <Switch option1="Focus" option2="Break" />
-      </SwitchWrapper>
-      <CountdownTimer duration={20} isPlaying={isPlaying} />
-      <ButtonWrapper>
-        <TimerButton label={"Start"} onPress={onStartHandler} />
-        <TimerButton label={"Stop"} onPress={onStopHandler} />
-      </ButtonWrapper>
+      <Wrapper>
+        <SwitchWrapper>
+          <Switch option1="Focus" option2="Break" />
+        </SwitchWrapper>
+        <CountdownTimer duration={20} isPlaying={isPlaying} />
+        <ButtonWrapper>
+          <TimerButton label={"Start"} onPress={onStartHandler} />
+          <TimerButton label={"Stop"} onPress={onStopHandler} />
+        </ButtonWrapper>
+      </Wrapper>
     </Container>
   );
 };
@@ -36,13 +40,6 @@ const SwitchWrapper = styled.View`
 const TimerButton = styled(Button)`
   width: 120px;
   height: 50px;
-`;
-
-const Container = styled.View`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
 `;
 
 const ButtonWrapper = styled.View`
