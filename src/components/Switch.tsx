@@ -1,23 +1,30 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components/native";
 import Typography from "../components/Typography";
 import { themes } from "../styles/themes";
 
 type SwitchProps = {
-  defaultActive?: boolean;
   option1: string;
   option2: string;
+  activeDefault: boolean;
+  onSwitch?: () => void;
 };
 
 const Switch = ({
-  defaultActive = false,
-  option1 = "Yes",
-  option2 = "No",
+  activeDefault,
+  option1,
+  option2,
+  onSwitch,
 }: SwitchProps) => {
-  const [isActive, setIsActive] = useState<boolean>(defaultActive);
+  const [isActive, setIsActive] = useState<boolean>(activeDefault);
+
+  useEffect(() => {
+    setIsActive(activeDefault)
+  }, [activeDefault])
 
   const onChangeOptionHandler = () => {
     setIsActive(!isActive);
+    if (onSwitch) onSwitch();
   };
 
   return (
@@ -48,7 +55,7 @@ const Option = styled.View<OptionProps>`
   justify-content: center;
   align-items: center;
   background-color: ${(props) =>
-    props.isActive ? themes.secondary : themes.fourth};
+    props.isActive ? themes.fourth : themes.secondary};
   transition: background-color 0.4s ease;
   height: 80px;
   width: 120px;

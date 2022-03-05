@@ -8,13 +8,16 @@ const screenWidth = Dimensions.get("window").width;
 type ICountdownTimer = {
   duration: number;
   isPlaying: boolean;
+  onComplete: (timeElasped: number) => void;
+  key?: number;
 };
 
-const CountdownTimer = ({ duration, isPlaying }: ICountdownTimer) => {
+const CountdownTimer = ({ duration, isPlaying, onComplete, key }: ICountdownTimer) => {
   const CountdownCircleTimerWidth = screenWidth * 0.65;
 
   return (
     <CountdownCircleTimer
+      key={key}
       isPlaying={isPlaying}
       duration={duration}
       colors={[
@@ -23,6 +26,7 @@ const CountdownTimer = ({ duration, isPlaying }: ICountdownTimer) => {
         ["#A30000", 0.2],
       ]}
       size={CountdownCircleTimerWidth}
+      onComplete={onComplete}
     >
       {({ remainingTime, animatedColor }) => (
         <Animated.Text style={{ color: animatedColor, fontSize: 40 }}>
