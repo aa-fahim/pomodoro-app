@@ -1,13 +1,18 @@
 import React from "react";
+import ExpandableFlatList from "../components/ExpandableFlatList";
+
 import styled from "styled-components/native";
-import Container from "../styles/Container";
+import { themes } from "../styles/themes";
+import ScreenContainer from "../styles/ScreenContainer";
 import Wrapper from "../styles/Wrapper";
 
 const ProfileScreen = () => {
   return (
-    <Container>
-      <Wrapper>This is the ProfileScreen</Wrapper>
-    </Container>
+    <ScreenContainer>
+      <Wrapper>
+        <ExpandableFlatList label="Today" children="Some Text"/>
+      </Wrapper>
+    </ScreenContainer>
   );
 };
 

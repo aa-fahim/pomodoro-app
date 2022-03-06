@@ -5,7 +5,11 @@ To do:
     - add context api to control study and break periods from timer screen and profile screen
       - added to control study period but not break period
     - add stats to profile screen
-    - control study and break peridos from profile screen
+      - Today
+      - Last 7 days
+      - Last 30 days
+      - Past Year
+    - control study and break peridos from profile screen (https://openbase.com/js/react-duration-picker/documentation)
     - add info screen about pomodoro timers
     - can we change color of button briefly when pressed
 

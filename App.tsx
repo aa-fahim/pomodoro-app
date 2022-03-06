@@ -47,7 +47,7 @@ const BottomTabNavigator = () => {
   return (
     <StatsContextProvider>
       <Tab.Navigator
-        initialRouteName="Timer"
+        initialRouteName="ProfileScreen"
         screenOptions={{
           tabBarActiveTintColor: themes.primary,
           headerShown: false,

@@ -1,14 +1,14 @@
 import React, { useState, useContext } from "react";
 import styled from "styled-components/native";
-import Container from "../styles/Container";
+import ScreenContainer from "../styles/ScreenContainer";
 import Wrapper from "../styles/Wrapper";
 import Button from "../components/Button";
 import Switch from "../components/Switch";
 import CountdownTimer from "../components/CountdownTimer";
 import { StatsContext } from "../context/statsContext";
 
-const studyTime = 20;
-const breakTime = 10;
+const studyTime = 2;
+const breakTime = 1;
 
 const TimerScreen = () => {
   const context = useContext(StatsContext);
@@ -23,39 +23,35 @@ const TimerScreen = () => {
     setStartTime(Date.now());
   };
 
-  const onStopHandler = () => {
-    setIsPlaying(false);
+  const onStopHandler = () => {  
     const timeSpentStudying = Date.now() - startTime;
     context.updateTotalTimeSpentStudying(timeSpentStudying);
     setStartTime(0);
+    setIsPlaying(false);
   };
 
   const onCompleteHandler = () => {
     onStopHandler();
+    const timeToReset = isFocus ? breakTime : studyTime;
     setIsFocus(!isFocus);
-    const timeToReset = isFocus ? studyTime : breakTime;
-
-    setCountdownTimerKey(countdownTimerKey + 1);
     setCountdownDuration(timeToReset);
+    setCountdownTimerKey(countdownTimerKey + 1);
   }
 
   const resetTimer = () => {
     onStopHandler();
-    const timeToReset = isFocus ? studyTime : breakTime;
-    
     setCountdownTimerKey(countdownTimerKey + 1);
-    setCountdownDuration(timeToReset);
   }
 
   const onSwitch = () => {
     const timeToReset = isFocus ? breakTime : studyTime;
     setIsFocus(!isFocus);
-    setCountdownTimerKey(countdownTimerKey + 1);
     setCountdownDuration(timeToReset);
+    setCountdownTimerKey(countdownTimerKey + 1);
   }
 
   return (
-    <Container>
+    <ScreenContainer>
       <Wrapper>
         <SwitchWrapper>
           <Switch activeDefault={isFocus} option1="Focus" option2="Break" onSwitch={onSwitch} />
@@ -75,7 +71,7 @@ const TimerScreen = () => {
           <TimerButton label="Reset" onPress={resetTimer} />
         </ButtonWrapper>
       </Wrapper>
-    </Container>
+    </ScreenContainer>
   );
 };
 

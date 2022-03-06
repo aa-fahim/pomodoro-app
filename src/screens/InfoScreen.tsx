@@ -1,13 +1,13 @@
 import React from "react";
 import styled from "styled-components/native";
-import Container from "../styles/Container";
+import ScreenContainer from "../styles/ScreenContainer";
 import Wrapper from "../styles/Wrapper";
 
 const InfoScreen = () => {
   return (
-    <Container>
+    <ScreenContainer>
       <Wrapper>This is the InfoScreen</Wrapper>
-    </Container>
+    </ScreenContainer>
   );
 };
 

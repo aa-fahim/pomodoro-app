@@ -1,7 +1,7 @@
 import styled from "styled-components/native";
 import { themes } from "./themes";
 
-const Container = styled.View`
+const ScreenContainer = styled.View`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -10,4 +10,4 @@ const Container = styled.View`
   padding: 25px;
 `;
 
-export default Container;
+export default ScreenContainer;

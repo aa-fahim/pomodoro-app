@@ -1,11 +1,18 @@
 const themes = {
+  /** Burgundy */
   primary: "#4A1E21",
+  /** Purple */
   secondary: "#4C2648",
+  /** Weird mix of yellow and green */
   tertiary: "$7A748",
+  /** Dirty Yellow */
   fourth: "#B79143",
+  /** Yellow */
   fifth: "#E99B45",
 
-  white: "#ffffff"
+  white: "#ffffff",
+  black: "#000000",
+  grey: "#808080",
 }
 
 export {

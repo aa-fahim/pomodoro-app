@@ -7,11 +7,12 @@ type TypographyProps = {
   children?: ReactNode;
   style?: StyleProp<ViewStyle>;
   size?: number;
+  color?: string;
 };
 
-const Typography: FC<TypographyProps> = ({ children, style, size = 14 }) => {
+const Typography: FC<TypographyProps> = ({ children, style, size = 14, color = themes.white }) => {
   return (
-    <Label size={size} style={style}>
+    <Label size={size} color={color} style={style}>
       {children}
     </Label>
   );
@@ -19,10 +20,11 @@ const Typography: FC<TypographyProps> = ({ children, style, size = 14 }) => {
 
 type TextProps = {
   size: number;
+  color: string;
 };
 
 const Label = styled.Text<TextProps>`
-  color: ${themes.white};
+  color: ${props => props.color};
   font-size: ${(props) => props.size};
 `;
 
