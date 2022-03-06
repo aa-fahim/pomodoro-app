@@ -1,10 +1,9 @@
 Ideas:
-    - right now, we have a start and stop button
-        - should we replace this with one button, that starts or stops depending if 
-        timer is on or off
+  - change start/stop button to use icons instead of text, and reset button to use icon also
 
 To do:
     - add context api to control study and break periods from timer screen and profile screen
+      - added to control study period but not break period
     - add stats to profile screen
     - control study and break peridos from profile screen
     - add info screen about pomodoro timers
