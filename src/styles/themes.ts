@@ -4,7 +4,7 @@ const themes = {
   /** Purple */
   secondary: "#4C2648",
   /** Weird mix of yellow and green */
-  tertiary: "$7A748",
+  tertiary: "#7A7148",
   /** Dirty Yellow */
   fourth: "#B79143",
   /** Yellow */
@@ -13,6 +13,7 @@ const themes = {
   white: "#ffffff",
   black: "#000000",
   grey: "#808080",
+  light_gray: "#edeff2",
 }
 
 export {

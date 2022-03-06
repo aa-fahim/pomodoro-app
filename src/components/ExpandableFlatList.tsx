@@ -2,7 +2,6 @@ import React, { ReactNode, useState } from "react";
 import { TouchableOpacity, View } from "react-native";
 import styled from "styled-components/native";
 import { themes } from "../styles/themes";
-import Typography from "./Typography";
 
 type IExpandableFlatList = {
   isOpen?: boolean
@@ -40,7 +39,8 @@ const LabelContainer = styled.View`
   justify-content: center;
   background: ${themes.secondary};
   height: 40px;
-  padding: 0px 10px;
+  padding: 0px 20px;
+  border-radius: 4px;
 `
 
 const HorizontalLine = styled.View`

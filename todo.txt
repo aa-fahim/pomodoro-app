@@ -2,13 +2,11 @@ Ideas:
   - change start/stop button to use icons instead of text, and reset button to use icon also
 
 To do:
+    - make nicer component to display stats in ProfileScreen
+    - add up/down arrow icon to ExpandableFlatList component
+      - https://icons.expo.fyi/AntDesign/down
     - add context api to control study and break periods from timer screen and profile screen
       - added to control study period but not break period
-    - add stats to profile screen
-      - Today
-      - Last 7 days
-      - Last 30 days
-      - Past Year
     - control study and break peridos from profile screen (https://openbase.com/js/react-duration-picker/documentation)
     - add info screen about pomodoro timers
     - can we change color of button briefly when pressed
