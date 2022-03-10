@@ -14,8 +14,6 @@ const themes = {
   black: "#000000",
   grey: "#808080",
   light_gray: "#edeff2",
-}
+};
 
-export {
-  themes
-}
+export { themes };

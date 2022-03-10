@@ -3,6 +3,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
+import StatsProvider from "./src/context/StatsProvider";
 import LoginScreen from "./src/screens/LoginScreen";
 import TimerScreen from "./src/screens/TimerScreen";
 import ProfileScreen from "./src/screens/ProfileScreen";
@@ -19,7 +20,9 @@ const Tab = createBottomTabNavigator();
 export default function App() {
   return (
     <NavigationContainer>
-      <MainStackNavigator />
+      <StatsProvider>
+        <MainStackNavigator />
+      </StatsProvider>
     </NavigationContainer>
   );
 }

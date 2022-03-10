@@ -1,10 +1,6 @@
 import React from "react";
 import styled from "styled-components/native";
-import {
-  View,
-  StyleProp,
-  ViewStyle,
-} from "react-native";
+import { View, StyleProp, ViewStyle } from "react-native";
 import { themes } from "../styles/themes";
 
 type InputBoxProps = {
@@ -16,7 +12,7 @@ type InputBoxProps = {
   secureTextEntry?: boolean;
 };
 
-const InputBox:React.FC<InputBoxProps> = (props: InputBoxProps) => {
+const InputBox: React.FC<InputBoxProps> = (props) => {
   const { label, style, ...restProps } = props;
 
   return (
@@ -41,6 +37,6 @@ const StyledTextInput = styled.TextInput`
   border-radius: 4;
   padding-horizontal: 10;
   padding-vertical: 4;
-`
+`;
 
 export default InputBox;
