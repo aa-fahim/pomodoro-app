@@ -1,5 +1,5 @@
 import React, { FC, ReactNode } from "react";
-import { View, Text } from "react-native";
+import { Text } from "react-native";
 import styled from "styled-components/native";
 
 type OptionItemProps = {
@@ -11,7 +11,7 @@ const OptionItem: FC<OptionItemProps> = ({ optionLabel, option }) => {
   return (
     <Container>
       <Text>{optionLabel}</Text>
-      <View>{option}</View>
+      <Text>{option}</Text>
     </Container>
   );
 };

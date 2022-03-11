@@ -1,5 +1,6 @@
 Ideas:
   - change start/stop button to use icons instead of text, and reset button to use icon also
+    - i think we do this when there's too much content on the screen, for now this is fine
 
 To do:
     - make nicer component to display stats in ProfileScreen
