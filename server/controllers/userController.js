@@ -50,14 +50,16 @@ exports.register = async (req, res) => {
 };
 
 // Find user
-exports.findUserName = (req, res) => {
-  if (!req.body.email) {
+exports.findUserName = async (req, res) => {
+  if (!req.params.email) {
     res.status(400).send({
       message: "No email provided in request body",
     });
   }
 
-  User.findUserName(req.body.email, (err, data) => {
+  await mongoDb.connectMongoDb();
+
+  User.findUserName(req.params.email, (err, data) => {
     if (err) {
       res.status(500).send({
         message: err.message || "Some error occured while finding the user.",
