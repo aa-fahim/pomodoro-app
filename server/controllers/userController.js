@@ -1,5 +1,8 @@
 const User = require("../models/userModel.js");
 const mongoDb = require("../config/mongodb");
+const { hashString, compareStrings } = require("../util/bcrypt-hash");
+const express = require("express");
+const { Request, Response } = express;
 
 // Register and create a new User
 exports.register = async (req, res) => {
@@ -10,13 +13,11 @@ exports.register = async (req, res) => {
     });
   }
 
-  if (!req.body.userName || !req.body.email || !req.body.password) {
+  if (!req.body?.userName || !req.body.email || !req.body.password) {
     res.status(400).send({
       message: "Invalid request body",
     });
   }
-
-  await mongoDb.connectMongoDb();
 
   // Check for duplicate users
   const doesUserNameExist = await User.doesUserNameExist(req.body.userName);
@@ -32,11 +33,14 @@ exports.register = async (req, res) => {
     });
   }
 
+  // Hash password
+  const hashedPassword = await hashString(req.body.password);
+
   // Create a new user
   const newUser = new User({
     userName: req.body.userName,
     email: req.body.email,
-    password: req.body.password,
+    password: hashedPassword,
   });
 
   // Save User in the database
@@ -65,5 +69,44 @@ exports.findUserName = async (req, res) => {
         message: err.message || "Some error occured while finding the user.",
       });
     } else res.send(data);
+  });
+};
+
+exports.login = async (req, res) => {
+  const { userName, password } = req.body;
+  if (!userName || !password) {
+  }
+
+  // Validate request
+  if (!req.body) {
+    res.status(400).send({
+      message: "Content can not be empty!",
+    });
+  }
+
+  if (!userName || !password) {
+    res.status(400).send({
+      message: "Invalid request body",
+    });
+  }
+
+  User.retrieveAccountByUserName(userName, async (err, account) => {
+    if (err) {
+      res.status(400).send({
+        message:
+          err.message || `No account found with the username of ${userName}`,
+      });
+      return;
+    }
+
+    const passwordsMatch = await compareStrings(password, account.password);
+
+    if (!passwordsMatch) {
+      res.status(400).send({
+        message: `Password is incorrect`,
+      });
+    } else {
+      res.send("Succesfully logged in!");
+    }
   });
 };

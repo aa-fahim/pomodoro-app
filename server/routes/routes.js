@@ -1,6 +1,5 @@
 module.exports = (app) => {
   const logEntry = require("../controllers/controller.js");
-  const user = require("../controllers/userController.js");
 
   // Create a new Log Entry
   app.post("/logEntry", logEntry.create);
@@ -13,10 +12,4 @@ module.exports = (app) => {
 
   // Delete a Log Entry with log Id
   app.delete("/logEntry/:logId", logEntry.delete);
-
-  // Register a user
-  app.post("/users", user.register);
-
-  // Find email of user
-  app.get("/users/retrieve-username/:email", user.findUserName);
 };

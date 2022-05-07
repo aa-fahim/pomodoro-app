@@ -22,6 +22,7 @@ app.get("/", (req, res) => {
 
 // import routes
 require("./routes/routes.js")(app);
+require("./routes/userRoutes.js")(app);
 
 // connect to mongoDb
 mongodb.connectMongoDb();
