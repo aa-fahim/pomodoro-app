@@ -45,10 +45,10 @@ User.findUserName = async (email, result) => {
 
 User.doesUserNameExist = async (userName) => {
   await mongoDb.connectMongoDb();
-  let res;
+  let resp;
 
   try {
-    res = await User.findOne({ userName: userName });
+    resp = await User.findOne({ userName: userName });
   } catch (error) {
     console.log(
       `Unable to find user with username of ${userName}, error: ${error}`
@@ -57,20 +57,20 @@ User.doesUserNameExist = async (userName) => {
 
   mongoose.connection.close();
 
-  if (!res) return true;
+  if (!resp) return true;
   return false;
 };
 
 User.doesEmailExist = async (email) => {
   await mongoDb.connectMongoDb();
-  let res;
+  let resp;
   try {
-    res = await User.findOne({ email: email });
+    resp = await User.findOne({ email: email });
   } catch (error) {
     console.log(`Unable to find user with email of ${email}, error: ${error}`);
   }
   mongoose.connection.close();
-  if (!res) return true;
+  if (!resp) return true;
   return false;
 };
 
@@ -80,7 +80,9 @@ User.retrieveAccountByUserName = async (userName, result) => {
     const resp = User.findOne({ userName: userName });
     result(null, resp);
   } catch (error) {
-    console.log("Error finding account with an username: ", userName);
+    console.log(
+      `Error finding account with an username of ${userName}, error: ${error}`
+    );
     result(error, null);
   }
   mongoose.connection.close();
