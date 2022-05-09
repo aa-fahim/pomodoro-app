@@ -1,31 +1,40 @@
 const mongoose = require("mongoose");
+const mongoDb = require("../config/mongodb");
 
 // schema
-const timeSchema = new mongoose.Schema({
-  userId: String,
-  timeSpentStudying: Number,
+const timeStatsSchema = new mongoose.Schema({
+  userName: String,
+  studyingTime: [
+    {
+      date: Date,
+      timeSpentStudying: Number,
+    },
+  ],
 });
 
-const Time = mongoose.model("Time", timeSchema);
+const TimeStats = mongoose.model("Time Stats", timeStatsSchema);
 
-Time.createDocument = (timeDocument, result) => {
-  const timeDocument = {
-    userId,
-    timeSpentStudying: 0,
-  }
+TimeStats.createDocument = async (userName, result) => {
+  const initialTimeStats = {
+    userName,
+    timeSpentStudying: [],
+  };
 
-  timeDocument.save().then(res => {
-    console.log("Time was successfully save.");
-    mongoose.connection.close();
-    result(null, timeDocument);
-  }).catch(err => {
-    console.log("Error creating new time: ", err);
-    result(err, null);
-  });
+  await mongoDb.connectMongoDb();
+  initialTimeStats
+    .save()
+    .then((res) => {
+      console.log("Time was successfully save.");
+      mongoose.connection.close();
+      result(null, res);
+    })
+    .catch((err) => {
+      console.log("Error creating new time: ", err);
+      result(err, null);
+    });
+  mongoose.connection.close();
 };
 
-Time.updateTime = (timeToAdd: number) => {
+TimeStats.updateTime = (timeToAdd) => {};
 
-}
-
-module.exports = Time;
+module.exports = TimeStats;

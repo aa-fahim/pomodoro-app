@@ -1,8 +1,9 @@
-const User = require("../models/userModel.js");
-const mongoDb = require("../config/mongodb");
-const { hashString, compareStrings } = require("../util/bcrypt-hash");
 const express = require("express");
 const { Request, Response } = express;
+const User = require("../models/userModel.js");
+const TimeStats = require("../models/timeModel.js");
+const mongoDb = require("../config/mongodb");
+const { hashString, compareStrings } = require("../util/bcrypt-hash");
 
 // Register and create a new User
 exports.register = async (req, res) => {
@@ -49,7 +50,16 @@ exports.register = async (req, res) => {
       res.status(500).send({
         message: err.message || "Some error occurred while creating the User.",
       });
-    else res.send(data);
+    else {
+      TimeStats.createDocument(req.body.userName, (err, res) => {
+        if (err)
+          res.status(500).send({
+            message:
+              err.message || "Some error occurred while creating the User.",
+          });
+        else res.send(data);
+      });
+    }
   });
 };
 
