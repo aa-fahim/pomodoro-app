@@ -14,7 +14,7 @@ exports.register = async (req, res) => {
     });
   }
 
-  if (!req.body?.userName || !req.body.email || !req.body.password) {
+  if (!req.body.userName || !req.body.email || !req.body.password) {
     res.status(400).send({
       message: "Invalid request body",
     });
@@ -26,12 +26,14 @@ exports.register = async (req, res) => {
     res.status(400).send({
       message: `Account already exists with username of ${req.body.userName}`,
     });
+    return;
   }
   const doesEmailExist = await User.doesEmailExist(req.body.email);
   if (doesEmailExist) {
     res.status(400).send({
       message: `Account already exists with email of ${req.body.email}`,
     });
+    return;
   }
 
   // Hash password
@@ -71,14 +73,12 @@ exports.findUserName = async (req, res) => {
     });
   }
 
-  await mongoDb.connectMongoDb();
-
   User.findUserName(req.params.email, (err, data) => {
     if (err) {
       res.status(500).send({
         message: err.message || "Some error occured while finding the user.",
       });
-    } else res.send(data);
+    } else res.send({ user: data });
   });
 };
 

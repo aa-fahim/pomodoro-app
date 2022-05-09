@@ -29,57 +29,61 @@ User.register = async (newUser, result) => {
     });
 };
 
-User.findUserName = (email, result) => {
-  User.find({ email: email })
-    .then((res) => {
-      console.log("Successfully found username.");
-      mongoose.connection.close();
-      result(null, res);
-    })
-    .catch((err) => {
-      console.log("Error finding username with an account email of: ", email);
-      result(err, null);
-    });
+User.findUserName = async (email, result) => {
+  await mongoDb.connectMongoDb();
+
+  try {
+    const resp = await User.findOne({ email: email });
+    result(null, resp);
+  } catch (error) {
+    console.log(`Error finding username with an account email of ${email}`);
+    result(error, null);
+  }
+
+  mongoose.connection.close();
 };
 
 User.doesUserNameExist = async (userName) => {
   await mongoDb.connectMongoDb();
+  let res;
+
   try {
-    const res = await User.find({ userName: userName });
-    mongoose.connection.close();
-    if (!res || res.length > 0) return true;
-    return false;
+    res = await User.findOne({ userName: userName });
   } catch (error) {
     console.log(
-      `Unable to find username with username of ${userName}, error: ${error}`
+      `Unable to find user with username of ${userName}, error: ${error}`
     );
-    mongoose.connection.close();
-    return true;
   }
+
+  mongoose.connection.close();
+
+  if (!res) return true;
+  return false;
 };
 
 User.doesEmailExist = async (email) => {
   await mongoDb.connectMongoDb();
-  const res = await User.find({ email: email });
+  let res;
+  try {
+    res = await User.findOne({ email: email });
+  } catch (error) {
+    console.log(`Unable to find user with email of ${email}, error: ${error}`);
+  }
   mongoose.connection.close();
-  if (!res || res.length > 0) return true;
+  if (!res) return true;
   return false;
 };
 
 User.retrieveAccountByUserName = async (userName, result) => {
   await mongoDb.connectMongoDb();
-
-  User.find({ userName: userName })
-    .limit(1)
-    .then((res) => {
-      console.log("Successfully found account.");
-      mongoose.connection.close();
-      result(null, res[0]);
-    })
-    .catch((err) => {
-      console.log("Error finding account with an username: ", userName);
-      result(err, null);
-    });
+  try {
+    const resp = User.findOne({ userName: userName });
+    result(null, resp);
+  } catch (error) {
+    console.log("Error finding account with an username: ", userName);
+    result(error, null);
+  }
+  mongoose.connection.close();
 };
 
 module.exports = User;

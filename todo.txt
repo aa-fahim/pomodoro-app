@@ -11,6 +11,3 @@ To do:
     - can we change color of button briefly when pressed
     - add font style
     - dark theme mode
-    - I don't think we break when we find duplicate username or email in
-      register API, so we did up creating the account but sending the client 
-      as message of account already exists with this email or username
