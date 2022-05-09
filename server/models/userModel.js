@@ -13,7 +13,8 @@ const userSchema = new mongoose.Schema({
 
 const User = mongoose.model("User", userSchema);
 
-User.register = (newUser, result) => {
+User.register = async (newUser, result) => {
+  await mongoDb.connectMongoDb();
   newUser
     .save()
     .then((res) => {
@@ -23,6 +24,7 @@ User.register = (newUser, result) => {
     })
     .catch((err) => {
       console.log("Error creating new user: ", err);
+      mongoose.connection.close();
       result(err, null);
     });
 };
@@ -42,10 +44,18 @@ User.findUserName = (email, result) => {
 
 User.doesUserNameExist = async (userName) => {
   await mongoDb.connectMongoDb();
-  const res = await User.find({ userName: userName });
-  mongoose.connection.close();
-  if (!res || res.length > 0) return true;
-  return false;
+  try {
+    const res = await User.find({ userName: userName });
+    mongoose.connection.close();
+    if (!res || res.length > 0) return true;
+    return false;
+  } catch (error) {
+    console.log(
+      `Unable to find username with username of ${userName}, error: ${error}`
+    );
+    mongoose.connection.close();
+    return true;
+  }
 };
 
 User.doesEmailExist = async (email) => {

@@ -1,7 +1,7 @@
 const express = require("express");
 const { Request, Response } = express;
 const User = require("../models/userModel.js");
-const TimeStats = require("../models/timeModel.js");
+const TimeController = require("./timeController.js");
 const mongoDb = require("../config/mongodb");
 const { hashString, compareStrings } = require("../util/bcrypt-hash");
 
@@ -51,7 +51,7 @@ exports.register = async (req, res) => {
         message: err.message || "Some error occurred while creating the User.",
       });
     else {
-      TimeStats.createDocument(req.body.userName, (err, res) => {
+      TimeController.createDocument(req.body.userName, (err, data) => {
         if (err)
           res.status(500).send({
             message:

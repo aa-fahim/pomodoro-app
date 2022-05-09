@@ -14,27 +14,22 @@ const timeStatsSchema = new mongoose.Schema({
 
 const TimeStats = mongoose.model("Time Stats", timeStatsSchema);
 
-TimeStats.createDocument = async (userName, result) => {
-  const initialTimeStats = {
-    userName,
-    timeSpentStudying: [],
-  };
-
+TimeStats.createDocument = async (timeStats, result) => {
   await mongoDb.connectMongoDb();
-  initialTimeStats
+  timeStats
     .save()
     .then((res) => {
-      console.log("Time was successfully save.");
+      console.log("Time was successfully saved.");
       mongoose.connection.close();
       result(null, res);
     })
     .catch((err) => {
       console.log("Error creating new time: ", err);
+      mongoose.connection.close();
       result(err, null);
     });
-  mongoose.connection.close();
 };
 
-TimeStats.updateTime = (timeToAdd) => {};
+TimeStats.updateTime = (timeStats) => {};
 
 module.exports = TimeStats;

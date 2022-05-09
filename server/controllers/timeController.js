@@ -1,9 +1,17 @@
-const Time = require("../models/timeModel.js");
-const mongoDb = require("../config/mongodb");
+const TimeStats = require("../models/timeModel.js");
 
-exports.createDocument = (userId) => {
-  const newTimeDocument = new Time({
-    userId,
-    timeSpentStudying: 0,
+exports.createDocument = (userName, result) => {
+  const timeStats = new TimeStats({
+    userName,
+    timeSpentStudying: [],
+  });
+
+  TimeStats.createDocument(timeStats, (err, data) => {
+    if (err) {
+      result(err, null);
+      return;
+    }
+
+    result(null, data);
   });
 };
